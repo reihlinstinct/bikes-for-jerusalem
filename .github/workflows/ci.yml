@@ -1,0 +1,59 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  unit:
+    name: unit + build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: BASE_PATH=/bikes-for-jerusalem npm run build
+      - name: Summary
+        run: |
+          {
+            echo "## Unit tests and build"
+            echo "- Ran node:test unit tests (html escaping, ICS, build output, links, RTL, CSP)."
+            echo "- Built $(find dist -name index.html | wc -l) pages with BASE_PATH=/bikes-for-jerusalem."
+          } >> "$GITHUB_STEP_SUMMARY"
+  e2e:
+    name: e2e (${{ matrix.browser }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: npx playwright test --project=${{ matrix.browser }}-desktop --project=${{ matrix.browser }}-mobile
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: e2e-${{ matrix.browser }}
+          path: |
+            test-results/shots
+            playwright-report
+          retention-days: 14
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## e2e (${{ matrix.browser }}, desktop + mobile)"
+            echo "- Screenshots of all 7 pages and the Playwright report are in the run artifacts."
+          } >> "$GITHUB_STEP_SUMMARY"

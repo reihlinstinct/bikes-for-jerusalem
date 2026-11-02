@@ -1,0 +1,17 @@
+{
+  "name": "bikes-for-jerusalem",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static Hebrew RTL website for Bikes for Jerusalem (AVI)",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test \"tests/unit/*.test.mjs\"",
+    "test:e2e": "playwright test",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  }
+}

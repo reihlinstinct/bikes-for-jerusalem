@@ -1,0 +1,22 @@
+{
+  "name": "אופניים בשביל ירושלים",
+  "short": "אב״י",
+  "tagline": "ארגון הרוכבים והרוכבות של ירושלים",
+  "lang": "he",
+  "nav": [
+    { "id": "home", "path": "", "label": "דף הבית" },
+    { "id": "rider", "path": "rider/", "label": "הכל לרוכב" },
+    { "id": "events", "path": "events/", "label": "אירועים" },
+    { "id": "articles", "path": "articles/", "label": "כתבות" },
+    { "id": "act", "path": "act/", "label": "השפיעו כבר היום" },
+    { "id": "about", "path": "about/", "label": "אודות" },
+    { "id": "contact", "path": "contact/", "label": "צרו קשר" }
+  ],
+  "social": [
+    { "label": "אינסטגרם", "url": "#" },
+    { "label": "פייסבוק", "url": "#" },
+    { "label": "X", "url": "#" },
+    { "label": "ערוץ עדכונים שקט", "url": "#" }
+  ],
+  "placeholderNotice": "תוכן דמה - יוחלף בתוכן אמיתי"
+}
