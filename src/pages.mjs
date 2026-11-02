@@ -2,7 +2,8 @@ import { html, raw, esc } from './html.mjs';
 
 const link = (base, path) => `${base}/${path}`.replace(/\/{2,}/g, '/').replace(/^$/, '/');
 
-export function layout({ site, base, current, title, body }) {
+export function layout({ site, base, current, title, body, siteUrl = '' }) {
+  const origin = siteUrl.replace(/\/+$/, '');
   const pageTitle = current === 'home' ? `${site.name} (${site.short})` : `${title} | ${site.short}`;
   const nav = site.nav.map((n) => html`<li><a href="${link(base, n.path)}"${raw(n.id === current ? ' aria-current="page"' : '')}>${n.label}</a></li>`);
   const social = site.social.map((s) => html`<li><a href="${s.url}" rel="noopener">${s.label}</a></li>`);
@@ -11,14 +12,14 @@ export function layout({ site, base, current, title, body }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <title>${pageTitle}</title>
 <meta name="description" content="${site.name} - ${site.tagline}">
 <meta property="og:title" content="${pageTitle}">
 <meta property="og:description" content="${site.tagline}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
-<meta property="og:image" content="${link(base, 'assets/img/og.png')}">
+<meta property="og:image" content="${origin ? `${origin}/assets/img/og.png` : link(base, 'assets/img/og.png')}">
 <link rel="icon" type="image/svg+xml" href="${link(base, 'assets/img/favicon.svg')}">
 <link rel="stylesheet" href="${link(base, 'assets/css/site.css')}">
 <script src="${link(base, 'assets/js/site.js')}" defer></script>

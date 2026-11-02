@@ -9,6 +9,22 @@ export function toIcsDate(iso) {
 
 const escText = (s) => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 
+/** Folds a content line at 75 octets (RFC 5545 3.1) without splitting UTF-8 characters. */
+export function foldLine(line) {
+  const enc = new TextEncoder();
+  const out = [];
+  let cur = '';
+  let len = 0;
+  let limit = 75;
+  for (const ch of line) {
+    const n = enc.encode(ch).length;
+    if (len + n > limit) { out.push(cur); cur = ''; len = 0; limit = 74; }
+    cur += ch; len += n;
+  }
+  out.push(cur);
+  return out.join('\r\n ');
+}
+
 export function eventToIcs(ev, now = new Date()) {
   return [
     'BEGIN:VCALENDAR',
@@ -25,5 +41,5 @@ export function eventToIcs(ev, now = new Date()) {
     'END:VEVENT',
     'END:VCALENDAR',
     '',
-  ].join('\r\n');
+  ].map(foldLine).join('\r\n');
 }

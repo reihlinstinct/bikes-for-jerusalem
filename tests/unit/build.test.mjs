@@ -73,3 +73,11 @@ test('content stays on public placeholder text only (no emails or phones)', () =
   assert.doesNotMatch(blob, /[\w.+-]+@[\w-]+\.[\w.]+/);
   assert.doesNotMatch(blob, /\b0\d{1,2}-?\d{7}\b/);
 });
+
+test('og:image is absolute when siteUrl is given, and CSP forbids objects', () => {
+  const o = mkdtempSync(join(tmpdir(), 'bfj-abs-'));
+  build({ root, out: o, base: '/bikes-for-jerusalem', siteUrl: 'https://example.test/bikes-for-jerusalem/' });
+  const h = readFileSync(join(o, 'index.html'), 'utf8');
+  assert.match(h, /og:image" content="https:\/\/example\.test\/bikes-for-jerusalem\/assets\/img\/og\.png"/);
+  assert.match(h, /object-src 'none'/);
+});

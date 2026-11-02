@@ -70,3 +70,13 @@ test('CSP blocks nothing the pages need (no console errors)', async ({ page }) =
   for (const [path] of PAGES) await page.goto(path);
   expect(errors).toEqual([]);
 });
+
+test('articles tabs support arrow keys (RTL: right arrow goes to the previous tab)', async ({ page }) => {
+  await page.goto('/articles/');
+  await page.getByRole('tab', { name: 'כתבות' }).focus();
+  await page.keyboard.press('ArrowLeft');
+  await expect(page.getByRole('tab', { name: 'תקשורת' })).toBeFocused();
+  await expect(page.locator('#panel-press')).toBeVisible();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.getByRole('tab', { name: 'כתבות' })).toBeFocused();
+});

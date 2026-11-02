@@ -18,3 +18,18 @@ test('eventToIcs produces a CRLF calendar with escaped text', () => {
   assert.ok(ics.includes('DTSTART:20261204T070000Z\r\n'));
   assert.ok(ics.endsWith('END:VCALENDAR\r\n'));
 });
+
+import { foldLine } from '../../src/ics.mjs';
+
+test('foldLine folds long lines at 75 octets and keeps UTF-8 intact', () => {
+  const long = 'DESCRIPTION:' + 'א'.repeat(80);
+  const folded = foldLine(long);
+  const parts = folded.split('\r\n ');
+  assert.ok(parts.length > 1);
+  assert.ok(parts.every((p, i) => new TextEncoder().encode(p).length + (i ? 1 : 0) <= 75));
+  assert.equal(parts.join(''), long);
+});
+
+test('foldLine leaves short lines alone', () => {
+  assert.equal(foldLine('SUMMARY:x'), 'SUMMARY:x');
+});
