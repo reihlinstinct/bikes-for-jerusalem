@@ -2,8 +2,21 @@
 
 | Asset | File | Source | Licence / status |
 | --- | --- | --- | --- |
-| Logo | `assets/img/logo-placeholder.svg` | Created for this repo (generic bicycle icon) | MIT, temporary placeholder |
-| Favicon | `assets/img/favicon.svg` | Copy of the placeholder logo | MIT, temporary |
-| Link preview | `assets/img/og.png` | Generated from the placeholder logo | MIT, temporary |
+| Logo (original) | `docs/brand/logo-facebook-profile-2048.jpg` | Profile picture of the organization's public Facebook page https://www.facebook.com/cyclejerusalem/ , downloaded 2026-11-02 at 2048x2048 | Organization's own logo. Use approved by the site owner contact ("הכל מאושר לשימוש", 2026-11-02). Not MIT. |
+| Header logo | `assets/img/logo.jpg` | Resized from the original (192 px) | As above |
+| Favicon, touch icon | `assets/img/favicon.png`, `assets/img/apple-touch-icon.png` | Resized from the original | As above |
+| Link preview | `assets/img/og.png` | Original on a purple field, 1200x630 | As above |
 
-The organization's official logo and partner logos are not included. A public web search found no official downloadable logo file, and copying logos from third-party pages without permission is not safe. Official assets are requested in the "Official brand assets" issue. When they arrive, add a row here with the source and the permission given.
+## Palette
+Derived from the logo (dominant colors measured on the 2048 px file).
+
+| Role | Value | Use |
+| --- | --- | --- |
+| Primary purple | `#684199` | buttons, links, active tab, theme color. White text on it has a contrast ratio of about 8:1 |
+| Dark purple | `#4a2c70` | hover state (derived, darker shade of the primary) |
+| Tint | `#f5f1f9` | cards and hero background (light tint of the primary) |
+| White | `#ffffff` | logo mark, page background |
+
+## Open
+The logo is a 2048 px JPEG. A vector or higher-quality official file, partner logos and any brand guide are still requested in issue #2. When they arrive, replace the files here and update this table.
+The earlier generated placeholder icon was removed.

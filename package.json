@@ -1,6 +1,6 @@
 {
   "name": "bikes-for-jerusalem",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Static Hebrew RTL website for Bikes for Jerusalem (AVI)",
   "type": "module",

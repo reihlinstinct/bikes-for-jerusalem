@@ -80,3 +80,10 @@ test('articles tabs support arrow keys (RTL: right arrow goes to the previous ta
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('tab', { name: 'כתבות' })).toBeFocused();
 });
+
+test('header shows the organization logo, loaded', async ({ page }) => {
+  await page.goto('/');
+  const img = page.locator('.brand img');
+  await expect(img).toBeVisible();
+  expect(await img.evaluate((e) => e.complete && e.naturalWidth > 0)).toBe(true);
+});

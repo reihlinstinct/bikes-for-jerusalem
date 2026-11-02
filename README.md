@@ -8,7 +8,7 @@ Website of **Bikes for Jerusalem (AVI)**, the organization of Jerusalem's cyclis
 Live site: https://reihlinstinct.github.io/bikes-for-jerusalem/
 
 ## Status
-Phase 1 (static skeleton, placeholder content and logo) is done. See [CHANGELOG](CHANGELOG.md).
+Phase 1 (static skeleton, placeholder content) is done, with the organization logo and purple palette applied. See [CHANGELOG](CHANGELOG.md).
 
 ## Docs
 - [Site plan](docs/plan.md) (Hebrew) and [wireframes v1](docs/design/wireframes-v1.pdf)
@@ -38,4 +38,4 @@ npm run test:e2e              # e2e, desktop and mobile
 ## Contributing
 Open an issue, work on a branch, open a PR with tests. Content edits are PRs to `content/`. No personal data in this public repo.
 
-Licence: MIT (code). Brand assets are covered separately in [docs/assets.md](docs/assets.md).
+Licence: MIT (code). The logo and brand assets belong to the organization and are covered separately in [docs/assets.md](docs/assets.md).

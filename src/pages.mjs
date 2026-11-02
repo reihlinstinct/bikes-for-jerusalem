@@ -20,14 +20,16 @@ export function layout({ site, base, current, title, body, siteUrl = '' }) {
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
 <meta property="og:image" content="${origin ? `${origin}/assets/img/og.png` : link(base, 'assets/img/og.png')}">
-<link rel="icon" type="image/svg+xml" href="${link(base, 'assets/img/favicon.svg')}">
+<link rel="icon" type="image/png" sizes="64x64" href="${link(base, 'assets/img/favicon.png')}">
+<link rel="apple-touch-icon" href="${link(base, 'assets/img/apple-touch-icon.png')}">
+<meta name="theme-color" content="#684199">
 <link rel="stylesheet" href="${link(base, 'assets/css/site.css')}">
 <script src="${link(base, 'assets/js/site.js')}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">דלגו לתוכן</a>
 <header class="site-header">
-  <a class="brand" href="${link(base, '')}"><img src="${link(base, 'assets/img/logo-placeholder.svg')}" alt="" width="40" height="40"><span>${site.short}</span></a>
+  <a class="brand" href="${link(base, '')}"><img src="${link(base, 'assets/img/logo.jpg')}" alt="לוגו אב״י" width="44" height="44"><span>${site.short}</span></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">תפריט</button>
   <nav aria-label="ניווט ראשי"><ul id="site-nav" class="nav">${nav}</ul></nav>
 </header>
