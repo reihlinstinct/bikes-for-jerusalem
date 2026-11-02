@@ -12,7 +12,7 @@ Derived from the logo (dominant colors measured on the 2048 px file).
 
 | Role | Value | Use |
 | --- | --- | --- |
-| Primary purple | `#684199` | buttons, links, active tab, theme color. White text on it has a contrast ratio of about 8:1 |
+| Primary purple | `#684199` | buttons, links, active tab, theme color. White text on it has a contrast ratio of 7.5:1 |
 | Dark purple | `#4a2c70` | hover state (derived, darker shade of the primary) |
 | Tint | `#f5f1f9` | cards and hero background (light tint of the primary) |
 | White | `#ffffff` | logo mark, page background |
