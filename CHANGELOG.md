@@ -2,6 +2,10 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](https://semver.org).
 
+## [0.2.0] - 2026-11-02
+### Changed
+- Organization logo from its Facebook page (header, favicon, touch icon, link preview) and purple palette (#684199) applied; generated placeholder icon removed. Facebook link added.
+
 ## [0.1.0] - 2026-11-02
 ### Added
 - Phase 1 static skeleton: seven RTL mobile-first pages (home, rider guide, events, articles, act, about, contact) with placeholder content.

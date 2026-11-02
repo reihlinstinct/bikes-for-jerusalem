@@ -81,3 +81,13 @@ test('og:image is absolute when siteUrl is given, and CSP forbids objects', () =
   assert.match(h, /og:image" content="https:\/\/example\.test\/bikes-for-jerusalem\/assets\/img\/og\.png"/);
   assert.match(h, /object-src 'none'/);
 });
+
+test('brand assets exist, are documented, and no placeholder icon remains', () => {
+  for (const f of ['logo.jpg', 'favicon.png', 'apple-touch-icon.png', 'og.png']) assert.ok(existsSync(join(root, 'assets/img', f)), f);
+  assert.ok(existsSync(join(root, 'docs/brand/logo-facebook-profile-2048.jpg')));
+  assert.ok(!existsSync(join(root, 'assets/img/logo-placeholder.svg')));
+  const doc = readFileSync(join(root, 'docs/assets.md'), 'utf8');
+  assert.match(doc, /facebook\.com\/cyclejerusalem/);
+  assert.match(doc, /#684199/);
+  assert.match(readFileSync(join(root, 'assets/css/site.css'), 'utf8'), /--brand:#684199/);
+});

@@ -55,7 +55,7 @@
     "direct": [
       { "label": "וואטסאפ", "url": "#" },
       { "label": "דוא״ל", "url": "#" },
-      { "label": "פייסבוק", "url": "#" },
+      { "label": "פייסבוק", "url": "https://www.facebook.com/cyclejerusalem/" },
       { "label": "אינסטגרם", "url": "#" }
     ]
   }
