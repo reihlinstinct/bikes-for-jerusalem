@@ -10,6 +10,16 @@ const PAGES = [
   ['/contact/', 'צרו קשר'],
 ];
 
+// The analytics beacon (cloudflareinsights.com, issue #11) is intentionally
+// unreachable in e2e runs (no external network). Abort those requests so the
+// zero-console-errors assertions keep covering real page errors only.
+test.beforeEach(async ({ page }) => {
+  // Fulfill (not abort) with an empty script: an aborted request still logs
+  // "Failed to load resource" as a console error in the page.
+  await page.route(/cloudflareinsights\.com/, (route) =>
+    route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }));
+});
+
 for (const [path, heading] of PAGES) {
   test(`page ${path} renders RTL with heading and no horizontal overflow`, async ({ page }, info) => {
     await page.goto(path);
@@ -20,6 +30,13 @@ for (const [path, heading] of PAGES) {
     await page.screenshot({ path: `test-results/shots/${info.project.name}${path.replace(/\//g, '_')}.png`, fullPage: true });
   });
 }
+
+test('every page discloses the anonymous analytics counter', async ({ page }) => {
+  for (const [path] of PAGES) {
+    await page.goto(path);
+    await expect(page.locator('.site-footer .privacy')).toContainText('Cloudflare Web Analytics');
+  }
+});
 
 test('navigation reaches every page', async ({ page, isMobile }) => {
   for (const [path] of PAGES.slice(1)) {
