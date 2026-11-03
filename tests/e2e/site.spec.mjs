@@ -31,6 +31,13 @@ for (const [path, heading] of PAGES) {
   });
 }
 
+test('every page discloses the anonymous analytics counter', async ({ page }) => {
+  for (const [path] of PAGES) {
+    await page.goto(path);
+    await expect(page.locator('.site-footer .privacy')).toContainText('Cloudflare Web Analytics');
+  }
+});
+
 test('navigation reaches every page', async ({ page, isMobile }) => {
   for (const [path] of PAGES.slice(1)) {
     await page.goto('/');

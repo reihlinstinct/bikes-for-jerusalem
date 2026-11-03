@@ -39,6 +39,7 @@ export function layout({ site, base, current, title, body, siteUrl = '' }) {
 <main id="main">${body}</main>
 <footer class="site-footer">
   <p>${site.name} - ${site.tagline}</p>
+  <p class="privacy">פרטיות: ספירת ביקורים אנונימית (Cloudflare Web Analytics) בלבד - ללא עוגיות, ללא שמירת כתובות IP וללא מעקב אישי.</p>
   <ul class="social" aria-label="רשתות חברתיות">${social}</ul>
 </footer>
 </body>
