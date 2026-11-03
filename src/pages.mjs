@@ -12,7 +12,7 @@ export function layout({ site, base, current, title, body, siteUrl = '' }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <title>${pageTitle}</title>
 <meta name="description" content="${site.name} - ${site.tagline}">
 <meta property="og:title" content="${pageTitle}">
@@ -25,6 +25,8 @@ export function layout({ site, base, current, title, body, siteUrl = '' }) {
 <meta name="theme-color" content="#684199">
 <link rel="stylesheet" href="${link(base, 'assets/css/site.css')}">
 <script src="${link(base, 'assets/js/site.js')}" defer></script>
+<!-- Cloudflare Web Analytics: anonymous, cookieless visit counter (issue #11) -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "59690418e5c04a2db334eb4dc883be64"}'></script>
 </head>
 <body>
 <a class="skip" href="#main">דלגו לתוכן</a>
