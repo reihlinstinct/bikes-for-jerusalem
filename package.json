@@ -12,6 +12,6 @@
     "serve": "node scripts/serve.mjs"
   },
   "devDependencies": {
-    "@playwright/test": "^1.48.0"
+    "@playwright/test": "^1.65.0"
   }
 }
