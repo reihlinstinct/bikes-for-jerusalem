@@ -29,3 +29,9 @@ must be checked again when real content replaces the placeholders.
 Report barriers and reproducible steps through the repository Issues page:
 https://github.com/reihlinstinct/bikes-for-jerusalem/issues
 Do not include personal data.
+
+Browser CI uses a digest-pinned official Playwright 1.65.0 runtime matching the
+shared tools lockfile. The preinstalled mode still launches and renders in both
+engines before axe scans. Missing browsers or libraries fail CI; no browser
+cache, apt mirror fetch or skipped test substitutes for these checks. Update
+the image digest and matching tool lockfiles together.
