@@ -1,0 +1,43 @@
+name: Accessibility
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  a11y:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Pinned shared accessibility tools
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: reihlinstinct/repo-checks
+          ref: 55f4c1155ef80421af0bf0cad2f296f2c3acd044
+          path: .ci/repo-checks
+          persist-credentials: false
+      - name: Start synthetic local preview
+        run: |
+          node scripts/a11y-preview.mjs preview > /tmp/zz-a11y-preview.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if [ -f .a11y-routes.json ] && curl -fsS http://127.0.0.1:8765/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          echo 'Synthetic preview failed to start'
+          exit 1
+      - uses: ./.ci/repo-checks/actions/a11y
+        with:
+          base-url: http://127.0.0.1:8765/
+          config: ${{ github.workspace }}/.a11y-routes.json
+      - name: Generated pages, mobile navigation and article tabs
+        env:
+          A11Y_TOOLS: ${{ github.workspace }}/.ci/repo-checks/actions/a11y
+        run: node scripts/a11y.mjs
+      - name: Scope summary
+        if: always()
+        run: |
+          printf '%s\n' '## Accessibility coverage' 'All seven pages and 404, Chromium/WebKit, desktop/mobile; mobile navigation and article-tab states.' 'Placeholder-only local content. No network isolation or conformance certification. Manual screen-reader/device/zoom checks remain open.' >> "$GITHUB_STEP_SUMMARY"

@@ -6,7 +6,8 @@
     "LICENSE",
     "CONTRIBUTING.md",
     "SECURITY.md",
-    ".github/CODEOWNERS"
+    ".github/CODEOWNERS",
+    "ACCESSIBILITY.md"
   ],
   "root": {
     "allow": [
