@@ -39,3 +39,16 @@ npm run test:e2e              # e2e, desktop and mobile
 Open an issue, work on a branch, open a PR with tests. Content edits are PRs to `content/`. No personal data in this public repo.
 
 Licence: MIT (code). The logo and brand assets belong to the organization and are covered separately in [docs/assets.md](docs/assets.md).
+
+## Accessibility engineering
+
+See [ACCESSIBILITY.md](ACCESSIBILITY.md) for the SI 5568 AA target and remaining
+manual/device checks. Run the placeholder-only local matrix with reviewed shared
+tools installed:
+
+```sh
+A11Y_TOOLS=/absolute/path/to/reviewed/repo-checks/actions/a11y node scripts/a11y.mjs
+```
+
+This runner is not a conformance audit or network sandbox. CI uses the locked
+shared dependencies and browser binaries. Production analytics are unchanged.
