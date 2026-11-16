@@ -1,0 +1,54 @@
+# אופניים בשביל ירושלים (אב״י)
+
+[![CI](https://github.com/reihlinstinct/bikes-for-jerusalem/actions/workflows/ci.yml/badge.svg)](https://github.com/reihlinstinct/bikes-for-jerusalem/actions/workflows/ci.yml)
+[![Pages](https://github.com/reihlinstinct/bikes-for-jerusalem/actions/workflows/pages.yml/badge.svg)](https://github.com/reihlinstinct/bikes-for-jerusalem/actions/workflows/pages.yml)
+
+Website of **Bikes for Jerusalem (AVI)**, the organization of Jerusalem's cyclists. Hebrew, RTL, mobile-first, static.
+
+Live site: https://reihlinstinct.github.io/bikes-for-jerusalem/
+
+## Status
+Phase 1 (static skeleton, placeholder content) is done, with the organization logo and purple palette applied. See [CHANGELOG](CHANGELOG.md).
+
+## Docs
+- [Site plan](docs/plan.md) (Hebrew) and [wireframes v1](docs/design/wireframes-v1.pdf)
+- [Phase 1 design](docs/design/phase1-design.md)
+- [Brand assets and provenance](docs/assets.md)
+
+## Develop
+Needs Node 22.
+
+```sh
+npm ci
+npm test                      # unit tests
+npm run build && npm run serve   # http://localhost:4173
+npx playwright install chromium webkit
+npm run test:e2e              # e2e, desktop and mobile
+```
+
+## Structure
+- `content/` - all site content as JSON (events, pages, home, site settings)
+- `src/` - HTML helpers, page templates, ICS generator, build
+- `scripts/` - build and local server
+- `assets/` - CSS, JS, images
+- `tests/unit`, `tests/e2e`
+
+`BASE_PATH` sets the URL prefix (Pages uses `/bikes-for-jerusalem`).
+
+## Contributing
+Open an issue, work on a branch, open a PR with tests. Content edits are PRs to `content/`. No personal data in this public repo.
+
+Licence: MIT (code). The logo and brand assets belong to the organization and are covered separately in [docs/assets.md](docs/assets.md).
+
+## Accessibility engineering
+
+See [ACCESSIBILITY.md](ACCESSIBILITY.md) for the SI 5568 AA target and remaining
+manual/device checks. Run the placeholder-only local matrix with reviewed shared
+tools installed:
+
+```sh
+A11Y_TOOLS=/absolute/path/to/reviewed/repo-checks/actions/a11y node scripts/a11y.mjs
+```
+
+This runner is not a conformance audit or network sandbox. CI uses the locked
+shared dependencies and browser binaries. Production analytics are unchanged.

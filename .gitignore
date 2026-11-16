@@ -1,0 +1,7 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+
+# Synthetic accessibility preview manifest
+.a11y-routes.json
